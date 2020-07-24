@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/google/go-github/v30/github"
+	"github.com/vvakame/sdlog/aelog"
 )
 
 const (
@@ -119,6 +120,8 @@ func (t *Transport) Token(ctx context.Context) (string, error) {
 			return "", fmt.Errorf("could not refresh installation id %v's token: %s", t.installationID, err)
 		}
 	}
+	aelog.Debugf(ctx, "installationID: %v", t.installationID)
+	aelog.Debugf(ctx, "expiresAt: %v", t.token.ExpiresAt)
 
 	return t.token.Token, nil
 }
