@@ -107,7 +107,7 @@ func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.Header.Add("Accept", acceptHeader) // We add to "Accept" header to avoid overwriting existing req headers.
 
 	ctx := req.Context()
-	aelog.Debugf(ctx, "%s %s", req.Method, req.RequestURI)
+	aelog.Debugf(ctx, "%s %v", req.Method, req.URL)
 	aelog.Debugf(ctx, "installationID: %v", t.installationID)
 	aelog.Debugf(ctx, "expiresAt: %v", t.token.ExpiresAt)
 	aelog.Debugf(ctx, "now: %v", time.Now())
