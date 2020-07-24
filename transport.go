@@ -123,7 +123,8 @@ func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
 func (t *Transport) Token(ctx context.Context) (string, error) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
-	if t.token == nil || t.token.ExpiresAt.Add(-time.Minute).Before(time.Now()) {
+	if t.token == nil || t.token.ExpiresAt.Add(-time.Minute).Before(time.Now()) || ctx.Value("ghinstallatio-refresh") != nil {
+		aelog.Debugf(ctx, "refreshing token.... installation id: %s", t.installationID)
 		// Token is not set or expired/nearly expired, so refresh
 		if err := t.refreshToken(ctx); err != nil {
 			return "", fmt.Errorf("could not refresh installation id %v's token: %s", t.installationID, err)
