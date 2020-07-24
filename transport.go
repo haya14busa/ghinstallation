@@ -112,6 +112,7 @@ func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
 	aelog.Debugf(ctx, "installationID: %v", t.installationID)
 	aelog.Debugf(ctx, "expiresAt: %v", t.token.ExpiresAt)
 	aelog.Debugf(ctx, "now: %v", time.Now())
+	aelog.Debugf(ctx, "permission: %#v", t.token.Permissions)
 	aelog.Debugf(ctx, "headers: %#v", req.Header)
 
 	resp, err := t.tr.RoundTrip(req)
