@@ -108,6 +108,7 @@ func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	ctx := req.Context()
 	aelog.Debugf(ctx, "%s %v", req.Method, req.URL)
+	aelog.Debugf(ctx, "token: %v", t.token.Token)
 	aelog.Debugf(ctx, "installationID: %v", t.installationID)
 	aelog.Debugf(ctx, "expiresAt: %v", t.token.ExpiresAt)
 	aelog.Debugf(ctx, "now: %v", time.Now())
